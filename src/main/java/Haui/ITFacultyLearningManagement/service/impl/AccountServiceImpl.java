@@ -37,12 +37,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public String randomPassword() {
-        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-        return uuid.substring(0, 8);
-    }
-
-    @Override
     public Optional<Account> findAccountByUserName(String username) {
         return accountRepository.findAccountByUserName(username);
     }

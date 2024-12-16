@@ -20,7 +20,7 @@ public interface ClassroomRepository extends JpaRepository<Classroom,Integer> {
             from tb_classroom l
             inner join tb_course c on c.course_id=l.course_id
             inner join tb_semester s on s.semester_id=l.semester_id
-            inner join tb_teacher t on t.lecture_id = l.lecture_id
+            inner join tb_lecture t on t.lecture_id = l.lecture_id
             inner join tb_info i on i.info_id = t.info_id
             WHERE unaccent(c.course_name) ILIKE  %:keySearch% and l.status = 1 and s.semester_id = :semesterId
             """,nativeQuery = true)
@@ -33,7 +33,7 @@ public interface ClassroomRepository extends JpaRepository<Classroom,Integer> {
             from tb_classroom l
             inner join tb_course c on c.course_id=l.course_id
             inner join tb_semester s on s.semester_id=l.semester_id
-            inner join tb_teacher t on t.lecture_id = l.lecture_id
+            inner join tb_lecture t on t.lecture_id = l.lecture_id
             inner join tb_info i on i.info_id = t.info_id
             WHERE unaccent(c.course_name) ILIKE  %:keySearch% and l.status = 1 and s.semester_id = :semesterId
             """,nativeQuery = true)

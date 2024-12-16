@@ -90,8 +90,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             "/api/result/get",
             "/api/classroom/search",
             "/api/dashboard/student",
-            "/api/dashboard/statisticPoint",
-
+            "/api/classroom/search",
+            "/api/dashboard/statisticPoint"
     };
 
     @Override
@@ -100,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.exceptionHandling().authenticationEntryPoint(authEntryPointJwt());
 
         http.authorizeHttpRequests().antMatchers("/api/auth/login").permitAll()
-                .antMatchers(adminApi).hasAuthority("1")
+                .antMatchers(adminApi).hasAnyAuthority("1","3")
                 .antMatchers(lectureApi).hasAnyAuthority("1","2")
                 .antMatchers(studentApi).hasAuthority("3")
                 .anyRequest().authenticated()

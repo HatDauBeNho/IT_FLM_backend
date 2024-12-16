@@ -70,5 +70,4 @@ public class ClassroomController {
             return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, e.getMessage()));
         }
     }
-
 }
