@@ -86,9 +86,9 @@ public class CourseController {
     public ResponseEntity<?> updateCourse(@RequestBody UpdateCourseRequest request)
     {
         try{
-            Optional<Course> courseOptional = courseService.findById(request.getCourseId());
+            Optional<Course> courseOptional = courseService.findById(request.getCondition());
             if (courseOptional.isEmpty())
-                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Course isn't exits"));
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Course condition isn't exits"));
 
             Course course = courseOptional.get();
             course.setCourseName(request.getCourseName());

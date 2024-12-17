@@ -47,7 +47,7 @@ public interface LectureRepository extends JpaRepository<Lecture,Integer> {
 
     @Query(value = """
             select
-                i.full_name as fullName, i.date_of_birth as dateOfBirth,
+                l.lecture_id as lectureId,i.full_name as fullName, i.date_of_birth as dateOfBirth,
                 i.gender, i.address,  i.phone_number as phoneNumber, i.email, l.average_rating as averageRating
             from tb_lecture l
             left join tb_info i on i.info_id = l.info_id

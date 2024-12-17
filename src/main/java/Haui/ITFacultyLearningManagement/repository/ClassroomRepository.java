@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface ClassroomRepository extends JpaRepository<Classroom,Integer> {
     @Query(value = """
-            select c.course_name as courseName, l.current_student as currentStudent, l.maximum_student as maximumStudent, i.full_name as teacherName,
+            select l.class_id as classId,c.course_name as courseName, l.current_student as currentStudent, l.maximum_student as maximumStudent, i.full_name as teacherName,
                 s.start_time as startTime, s.end_time as endTime
             from tb_classroom l
             inner join tb_course c on c.course_id=l.course_id

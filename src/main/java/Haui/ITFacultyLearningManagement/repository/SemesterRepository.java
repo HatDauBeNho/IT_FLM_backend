@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface SemesterRepository extends JpaRepository<Semester,Integer> {
     @Query(value = """
             SELECT
@@ -35,4 +37,15 @@ public interface SemesterRepository extends JpaRepository<Semester,Integer> {
             """,nativeQuery = true)
     DashboardLectureHandle getDashboardLecture(@Param("lectureId") int lectureId);
 
+    @Query(value = """
+            select * from tb_semester
+            where start_time >= now();
+            """,nativeQuery = true)
+    List<Semester> findBeginNow();
+
+    @Query(value = """
+            select name from tb_semester
+            where  end_time >= now() limit 1
+            """,nativeQuery = true)
+    String getSemesterNameNow();
 }

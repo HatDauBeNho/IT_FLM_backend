@@ -42,9 +42,10 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public DashboardAdminResponse getDashboardAdmin() {
+        String name = semesterRepository.getSemesterNameNow();
         int countStudent= studentRepository.countStudent();
         int countLecture = lectureRepository.countLecture();
-        return new DashboardAdminResponse(countLecture,countStudent);
+        return new DashboardAdminResponse(name,countLecture,countStudent);
     }
 
     @Override

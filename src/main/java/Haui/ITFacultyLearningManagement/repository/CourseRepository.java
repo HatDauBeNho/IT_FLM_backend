@@ -17,7 +17,7 @@ import java.util.Optional;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
     @Query(value = """
-            select course_name as courseName, credit, create_time as createTime
+            select course_id as courseId, course_name as courseName, credit, create_time as createTime
             from tb_course c
             WHERE unaccent(c.course_name) ILIKE  %:keySearch%
             """,nativeQuery = true)

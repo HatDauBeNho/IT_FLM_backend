@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DashboardAdminResponse {
+    private String nameSemester;
     private int countLecture;
     private int countStudent;
 }
