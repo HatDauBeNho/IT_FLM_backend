@@ -110,38 +110,38 @@ public class CourseServiceImpl implements CourseService {
 
 
     @Override
-    public boolean registerCourse(int classId,int accountId) {
+    public Integer registerCourse(int classId,int accountId) {
         Optional<Student> studentOptional = studentRepository.findByAccountId(accountId);
         if (studentOptional.isEmpty())
-            return false;
+            return 0;
 
         int studentId = studentOptional.get().getStudentId();
 
         Optional<Classroom> classroomOptional = classroomRepository.findById(classId);
         if (classroomOptional.isEmpty())
-            return false;
+            return 2;//khong ton tai lop hoc
 
         Optional<CourseRegistration> courseRegistrationOptional = courseRegistrationRepository.findByStuAndClass(studentId,classId);
         if (courseRegistrationOptional.isPresent())
-            return false;
+            return 3;//da dang ky hoc phan nay roi
 
         Classroom classroom = classroomOptional.get();
 
         int condition = courseRegistrationRepository.getCondition(classId);
         Double highestPoint = courseRegistrationRepository.getHighestPoint(condition,studentId);
         if (highestPoint!=null && highestPoint < 4)
-            return false;
+            return 4;// chua qua hoc phan tien quyet
 
         if (! (classroom.getCurrentStudent() < classroom.getMaximumStudent()) )
-            return false;
+            return 5; //lop hoc da day
 
         Optional<Semester> semesterOptional = semesterRepository.findById(classroom.getSemesterId());
         if (semesterOptional.isEmpty())
-            return false;
+            return 0;
 
         if (!LocalDate.now().isAfter(semesterOptional.get().getStartTime()) &&
                 LocalDate.now().isBefore(semesterOptional.get().getStartTime().minusMonths(1)))
-            return false;
+            return 6;// het thoi gian dang ky
 
         classroom.setCurrentStudent(classroom.getCurrentStudent() + 1);
         classroom.setUpdateTime(LocalDateTime.now());
@@ -149,12 +149,12 @@ public class CourseServiceImpl implements CourseService {
         CourseRegistration courseRegistration = new CourseRegistration(studentId,classroom.getClassId());
         courseRegistrationRepository.save(courseRegistration);
 
-        return true;
+        return 1;
     }
 
     @Override
-    public List<RegisteredCourseHandle> getRegisteredCourse(int studentId){
-        return courseRegistrationRepository.getRegisteredCourse(studentId);
+    public List<RegisteredCourseHandle> getRegisteredCourse(int studentId, int semesterId){
+        return courseRegistrationRepository.getRegisteredCourse(studentId,semesterId);
     }
 
     @Override

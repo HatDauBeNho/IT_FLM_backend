@@ -29,17 +29,18 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
     Optional<CourseRegistration> findByStudentIdAndCourseId(int courseId,int studentId);
 
     @Query(value = """
-            select cr.class_id as classId,c.course_name as "courseName", cr.current_student as "currentStudent", cr.maximum_student as "maximumStudent",
-            i.full_name as "fullName",s.start_time as "startTime",s.end_time as "endTime", cr.create_time as createTime
-            from tb_course c
-            left join tb_classroom cr on c.course_id = cr.course_id
+            select cr.class_id as classId,c.course_name as "courseName",
+            i.full_name as "fullName",s.start_time as "startTime",s.end_time as "endTime", cr.create_time as createTime, r.point
+            from tb_classroom cr
+            left join tb_course c on c.course_id = cr.course_id
             left join tb_course_registration r on cr.class_id= r.class_id
             left join tb_semester s on s.semester_id = cr.semester_id
             left join tb_lecture t on cr.lecture_id = t.lecture_id
             left join tb_info i on t.info_id = i.info_id
-            where r.student_id = :studentId
+            where r.student_id = :studentId and s.semester_id = :semesterId
             """, nativeQuery = true)
-    List<RegisteredCourseHandle> getRegisteredCourse(@Param("studentId") int studentId);
+    List<RegisteredCourseHandle> getRegisteredCourse(@Param("studentId") int studentId,
+                                                     @Param("semesterId") int semesterId);
 
     @Query(value = """
             select count(c.course_name)
@@ -75,8 +76,8 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
 
 
     @Query(value = """
-            select c.condition_id
-            from tb_class cl
+            select c.course_id
+            from tb_classroom cl
             inner join tb_course c on cl.course_id = c.course_id
             where cl.class_id = :classId
             """,nativeQuery = true)

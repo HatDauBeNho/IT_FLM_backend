@@ -3,7 +3,7 @@ package Haui.ITFacultyLearningManagement.custom.course.handle;
 import java.time.LocalDate;
 
 public interface CurrentTaughtHandle {
-    int getCourseId();
+    int getClassId();
     String getCourseName();
     int getCurrentStudent();
     int getMaximumStudent();

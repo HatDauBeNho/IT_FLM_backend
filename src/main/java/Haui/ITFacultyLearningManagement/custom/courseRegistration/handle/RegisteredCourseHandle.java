@@ -6,10 +6,9 @@ import java.time.LocalDateTime;
 public interface RegisteredCourseHandle {
     String getClassId();
     String getCourseName();
-    Integer getCurrentStudent();
-    Integer getMaximumStudent();
     String getFullName();
     LocalDate getStartTime();
     LocalDate getEndTime();
+    double getPoint();
     LocalDateTime getCreateTime();
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.JpaSort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -121,7 +122,7 @@ public class CourseController {
     }
 
     @GetMapping("registeredCourse")
-    public ResponseEntity<?> registeredCourse(){
+    public ResponseEntity<?> registeredCourse(@Param("semesterId") int semesterId){
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -132,7 +133,7 @@ public class CourseController {
             }
 
             return ResponseEntity.ok(new CustomResponse<>(1,
-                    courseService.getRegisteredCourse(studentOptional.get().getStudentId()),
+                    courseService.getRegisteredCourse(studentOptional.get().getStudentId(),semesterId),
                     "Success get list registered course"));
         }catch (Exception e){
             e.printStackTrace();
@@ -146,8 +147,19 @@ public class CourseController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-            if (!courseService.registerCourse(classId, userDetails.getId()))
+            int status = courseService.registerCourse(classId, userDetails.getId());
+            if (status==0)
                 return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Can't register"));
+            if (status==2)
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "không tồn tại lớp học"));
+            if (status==3)
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Đã đăng ký học phần này rồi"));
+            if (status==4)
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Chưa qua học phần tiên quyết"));
+            if (status==5)
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Lớp hoọc đã đầy"));
+            if (status==6)
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Hết thời gian đăng ký"));
 
             return ResponseEntity.ok(new CustomResponse<>(1, null, "Success register course"));
         }catch (Exception e){

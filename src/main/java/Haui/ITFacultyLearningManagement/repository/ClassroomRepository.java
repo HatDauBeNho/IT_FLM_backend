@@ -41,7 +41,7 @@ public interface ClassroomRepository extends JpaRepository<Classroom,Integer> {
                                     @Param("semesterId") int semesterId);
 
     @Query(value = """
-            select c.course_id as courseId,c.course_name as courseName, l.current_student as currentStudent, l.maximum_student as maximumStudent,
+            select l.class_id as classId,c.course_name as courseName, l.current_student as currentStudent, l.maximum_student as maximumStudent,
                 s.start_time as startTime,s.end_time as endTime
             from tb_classroom l
             left join tb_course c on l.course_id = c.course_id

@@ -30,9 +30,9 @@ public interface CourseService extends Generate<Course> {
 
     double getGPA(Integer studentId);
 
-    boolean registerCourse(int classId,int accountId);
+    Integer registerCourse(int classId,int accountId);
 
-    List<RegisteredCourseHandle> getRegisteredCourse(int studentId);
+    List<RegisteredCourseHandle> getRegisteredCourse(int studentId, int semesterId);
 
     Optional<CourseRegistration> findReByStuIdAndCourseId(int courseId,int studentId);
 

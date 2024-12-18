@@ -17,6 +17,17 @@ public class SemesterController {
     @GetMapping("/get")
     public ResponseEntity<?> getAll(){
         try{
+            return ResponseEntity.ok(new CustomResponse<>(1, semesterService.findAll(), "Success get semester"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, e.getMessage()));
+        }
+    }
+
+    @GetMapping("/beginNow")
+    public ResponseEntity<?> getSemesterBeginNow(){
+        try{
             return ResponseEntity.ok(new CustomResponse<>(1, semesterService.findBeginNow(), "Success get semester"));
 
         }catch (Exception e){
@@ -24,4 +35,5 @@ public class SemesterController {
             return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, e.getMessage()));
         }
     }
+
 }
