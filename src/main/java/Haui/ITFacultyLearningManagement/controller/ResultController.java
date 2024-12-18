@@ -26,7 +26,7 @@ public class ResultController {
     private StudentService studentService;
 
     @GetMapping("/get")
-    public ResponseEntity<?> getResult(@RequestParam("semesterId") int semesterId){
+    public ResponseEntity<?> getResult(@RequestParam("classId") int classId){
         try{
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -35,7 +35,7 @@ public class ResultController {
             if (studentOptional.isEmpty())
                 return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Student isn't exits"));
 
-            return ResponseEntity.ok(new CustomResponse<>(1, courseRegistrationService.getResult(studentOptional.get().getStudentId(),semesterId), "Success get result"));
+            return ResponseEntity.ok(new CustomResponse<>(1, courseRegistrationService.getResult(studentOptional.get().getStudentId(),classId), "Success get result"));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, e.getMessage()));

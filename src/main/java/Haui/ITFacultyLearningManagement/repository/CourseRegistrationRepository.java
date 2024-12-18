@@ -29,13 +29,13 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
     Optional<CourseRegistration> findByStudentIdAndCourseId(int courseId,int studentId);
 
     @Query(value = """
-            select c.course_name as "courseName", cr.current_student as "currentStudent", cr.maximum_student as "maximumStudent",
-            i.full_name as "fullName",s.start_time as "startTime",s.end_time as "endTime", cr.create_time as "createTime"
+            select cr.class_id as classId,c.course_name as "courseName", cr.current_student as "currentStudent", cr.maximum_student as "maximumStudent",
+            i.full_name as "fullName",s.start_time as "startTime",s.end_time as "endTime", cr.create_time as createTime
             from tb_course c
             left join tb_classroom cr on c.course_id = cr.course_id
             left join tb_course_registration r on cr.class_id= r.class_id
             left join tb_semester s on s.semester_id = cr.semester_id
-            left join tb_teacher t on cr.lecture_id = t.lecture_id
+            left join tb_lecture t on cr.lecture_id = t.lecture_id
             left join tb_info i on t.info_id = i.info_id
             where r.student_id = :studentId
             """, nativeQuery = true)
@@ -45,7 +45,7 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
             select count(c.course_name)
             from tb_course c
             inner join tb_course_registration r on c.course_id = r.course_id
-            inner join tb_teacher t on c.lecture_id = t.lecture_id
+            inner join tb_lecture t on c.lecture_id = t.lecture_id
             inner join tb_info i on t.info_id = i.info_id
             where r.student_id = :studentId
             """,nativeQuery = true)
@@ -62,15 +62,16 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
                            @Param("studentId") int studentId);
 
     @Query(value = """
-            select c.course_name as courseName, cr.point, s.name as semesterName
+            select c.course_name as courseName, cr.point, i.full_name as lectureName
             from tb_classroom cl
             left join tb_course_registration cr on cl.class_id = cr.class_id
             left join tb_course c on c.course_id = cl.course_id
-            left join tb_semester s on s.semester_id = cl.semester_id
-            where cr.student_id = :studentId and s.semester_id = :semesterId
+            left join tb_lecture l on cl.lecture_id = l.lecture_id
+            left join tb_info i on l.info_id = i.info_id
+            where cr.student_id = :studentId and cl.class_id = :classId
             """,nativeQuery = true)
-    List<ResultHandle> getResultWithSemesterId(@Param("studentId") int studentId,
-                                               @Param("semesterId") int semesterId);
+    List<ResultHandle> getResultWithClassId(@Param("studentId") int studentId,
+                                               @Param("classId") int classId);
 
 
     @Query(value = """

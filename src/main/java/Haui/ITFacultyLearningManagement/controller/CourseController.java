@@ -123,7 +123,6 @@ public class CourseController {
     @GetMapping("registeredCourse")
     public ResponseEntity<?> registeredCourse(){
         try {
-
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
@@ -141,7 +140,6 @@ public class CourseController {
         }
     }
 
-    //sua lai. cho phep dang ky lop hoc phần ở kỳ khác nhau. chua có check course condition
     @PostMapping("/register")
     public  ResponseEntity<?> registerCourse(@RequestParam("classId") Integer classId){
         try {
