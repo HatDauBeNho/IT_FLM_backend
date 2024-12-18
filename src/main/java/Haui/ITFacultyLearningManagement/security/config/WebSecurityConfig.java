@@ -102,6 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeHttpRequests().antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/api/semester/get").permitAll()
                 .antMatchers("/api/semester/beginNow").permitAll()
+                .antMatchers("/api/evaluate/question").permitAll()
                 .antMatchers(adminApi).hasAnyAuthority("1","3")
                 .antMatchers(lectureApi).hasAnyAuthority("1","2")
                 .antMatchers(studentApi).hasAuthority("3")
