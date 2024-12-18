@@ -46,9 +46,9 @@ public interface ClassroomRepository extends JpaRepository<Classroom,Integer> {
             from tb_classroom l
             left join tb_course c on l.course_id = c.course_id
             left join tb_semester s on s.semester_id = l.semester_id
-            where l.lecture_id = ?1 and l.status=1
+            where l.lecture_id = ?1 and l.status=1 and l.semester_id = ?2
             """,nativeQuery = true)
-    List<CurrentTaughtHandle> getCurrentTaught(int lectureId);
+    List<CurrentTaughtHandle> getCurrentTaught(int lectureId,int semesterId);
 
     @Query(value = """
             select * from tb_classroom where course_id = :courseId limit 1

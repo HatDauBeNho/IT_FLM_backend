@@ -191,7 +191,7 @@ public class CourseController {
     }
 
     @GetMapping("/currentTaught")
-    public ResponseEntity<?> getListCurrentTaught(){
+    public ResponseEntity<?> getListCurrentTaught(@Param("semesterId") int semesterId){
         try{
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -202,7 +202,7 @@ public class CourseController {
             }
 
             return ResponseEntity.ok(new CustomResponse<>(1,
-                    courseService.getCurrentTaught(teacherOptional.get().getLectureId())
+                    courseService.getCurrentTaught(teacherOptional.get().getLectureId(),semesterId)
                     ,"Success get list current taught"));
         }catch (Exception e){
             e.printStackTrace();
