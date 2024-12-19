@@ -11,4 +11,5 @@ public interface RegisteredCourseHandle {
     LocalDate getEndTime();
     double getPoint();
     LocalDateTime getCreateTime();
+    Integer getIsEvaluate();
 }

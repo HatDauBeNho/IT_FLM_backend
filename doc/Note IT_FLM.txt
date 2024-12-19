@@ -1,2 +1,3 @@
-
-bổ sung param semesterId cho api currentTaught
+- button chức năng ở quản lý học phần bị xa nhau
+- phân trang ví dụ limit 10 nhưng có 9 thì bị kéo func chọn trang lên (k cố định)
+- các ô trong cột, hàng cũng bị nhảy (k cố định)

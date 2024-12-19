@@ -15,4 +15,6 @@ public interface StudentService  extends  Generate<Student>{
     Optional<Student> findByAccountId( int accountId);
 
 
+
+
 }

@@ -10,5 +10,4 @@ public interface SearchStudentHandle {
     String getPhoneNumber();
     String getEmail();
     Double getGpa();
-
 }

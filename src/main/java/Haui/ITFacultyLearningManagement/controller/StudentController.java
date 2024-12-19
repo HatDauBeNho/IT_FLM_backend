@@ -5,6 +5,7 @@ import Haui.ITFacultyLearningManagement.custom.student.handle.SearchStudentHandl
 import Haui.ITFacultyLearningManagement.custom.student.request.SearchStudentRequest;
 import Haui.ITFacultyLearningManagement.custom.student.response.SearchStudentResponse;
 import Haui.ITFacultyLearningManagement.service.StudentService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +37,16 @@ public class StudentController {
 
             return ResponseEntity.ok(new CustomResponse<>(1, new SearchStudentResponse(total, searchStudentHandleList), "Success get list student"));
 
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, e.getMessage()));
+        }
+    }
+
+    @GetMapping("/accDetails")
+    public ResponseEntity<?> getAccountDetails(){
+        try{
+            return ResponseEntity.ok(new CustomResponse<>(1, studentService, "Success get list student"));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, e.getMessage()));

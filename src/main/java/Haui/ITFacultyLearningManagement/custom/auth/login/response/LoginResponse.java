@@ -15,5 +15,4 @@ public class LoginResponse {
     private int role;
     @JsonProperty(value = "token")
     private String token;
-
 }

@@ -15,4 +15,5 @@ public interface EvaluateRepository extends JpaRepository<Evaluate,Integer> {
             """,nativeQuery = true)
     Optional<Evaluate> findByStuAndClass(@Param("studentId") int studentId,
                                          @Param("classId") int classId);
+
 }

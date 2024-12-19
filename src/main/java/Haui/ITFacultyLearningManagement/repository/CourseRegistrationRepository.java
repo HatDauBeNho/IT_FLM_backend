@@ -29,7 +29,7 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
     Optional<CourseRegistration> findByStudentIdAndCourseId(int courseId,int studentId);
 
     @Query(value = """
-            select cr.class_id as classId,c.course_name as "courseName",
+            select cr.class_id as classId,c.course_name as "courseName", r.is_evaluate as isEvaluate,
             i.full_name as "fullName",s.start_time as "startTime",s.end_time as "endTime", cr.create_time as createTime, r.point
             from tb_classroom cr
             left join tb_course c on c.course_id = cr.course_id

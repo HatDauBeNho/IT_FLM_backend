@@ -71,6 +71,10 @@ public class EvaluateServiceImpl implements EvaluateService {
                 rating
         );
 
+        CourseRegistration courseRegistration = courseRegistrationOptional.get();
+        courseRegistration.setIsEvaluate(1);
+        courseRegistrationRepository.save(courseRegistration);
+
         evaluateRepository.save(evaluate);
         return true;
     }
