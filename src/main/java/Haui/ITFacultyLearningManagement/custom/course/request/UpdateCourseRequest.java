@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateCourseRequest {
+    private int courseId;
     private int condition;
     private String courseName;
     private int credit;

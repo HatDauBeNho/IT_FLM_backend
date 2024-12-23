@@ -1,3 +1,19 @@
 - button chức năng ở quản lý học phần bị xa nhau
 - phân trang ví dụ limit 10 nhưng có 9 thì bị kéo func chọn trang lên (k cố định)
 - các ô trong cột, hàng cũng bị nhảy (k cố định)
+- cập nhật học phần chưa hiện tên cũ, k cần bắt buộc phải có học phần tiên quyết
+- khi vào các trang quản lý auto lọc theo học
+ kỳ hiện tại- tab quản lý lớp, số sinh viên đăng ký phải là 20/70
+- thêm mới lớp học phần là chọn trường học phần chứ không phải học phần tiên quyết
+- khi thêm mới lớp học phần lỗi không phải là đặt tên trùng mà là lớp đã tồn tại
+- tab lớp học đang dạy thêm hiệu ứng hover khi trỏ vào tên lớp
+- điểm của sinh viên chưa xử lý với điểm -1 thì k hiện, ô điểm bị dài quá
+- khi đánh giá xong button của các chức năng bị nhảy ltung
+
+
+- api cancle học phần thiếu check điều kiện là phải ở học kỳ hiện tại thì mới được hủy
+- api đăng ký học phần vẫn đăng ký được học phần k phải o kỳ hiện tại 
+- api cập nhật học phần phải cập nhật theo course_id chứ không phải là condition
+
+thêm khoa công nghệ thông tin 
+thống kê điểm theo môn học

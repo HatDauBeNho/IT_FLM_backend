@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,8 +62,7 @@ public class EvaluateServiceImpl implements EvaluateService {
         }
 
         double result = (double) totalRating / request.getAnswer().size();
-        DecimalFormat df = new DecimalFormat("#.##");
-        double rating = Double.parseDouble(df.format(result));
+        double rating = Math.round(result * 100.0) / 100.0;
 
         Evaluate evaluate = new Evaluate(
                 request.getClassId(),

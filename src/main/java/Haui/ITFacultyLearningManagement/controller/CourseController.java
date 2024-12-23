@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -87,8 +88,12 @@ public class CourseController {
     public ResponseEntity<?> updateCourse(@RequestBody UpdateCourseRequest request)
     {
         try{
-            Optional<Course> courseOptional = courseService.findById(request.getCondition());
+            Optional<Course> courseOptional = courseService.findById(request.getCourseId());
             if (courseOptional.isEmpty())
+                return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Course isn't exits"));
+
+            Optional<Course> conditionOptional = courseService.findById(request.getCondition());
+            if (conditionOptional.isEmpty())
                 return ResponseEntity.badRequest().body(new CustomResponse<>(0, null, "Course condition isn't exits"));
 
             Course course = courseOptional.get();
