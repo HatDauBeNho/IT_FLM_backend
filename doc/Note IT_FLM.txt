@@ -9,8 +9,10 @@
 - tab lớp học đang dạy thêm hiệu ứng hover khi trỏ vào tên lớp
 - điểm của sinh viên chưa xử lý với điểm -1 thì k hiện, ô điểm bị dài quá
 - khi đánh giá xong button của các chức năng bị nhảy ltung
-
-
+-ở quản lý lớp tìm kiếm = gì?
+- tên cá nhânở góc màn hình chưa có
+- xem danh sách giảng viên chứ không phải giáo viên
+- giới tính là nam nữa k phải là 1 2 
 
 
 thêm khoa công nghệ thông tin 
