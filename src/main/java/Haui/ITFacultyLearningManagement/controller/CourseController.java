@@ -126,7 +126,7 @@ public class CourseController {
         }
     }
 
-    @GetMapping("registeredCourse")
+    @GetMapping("/registeredCourse")
     public ResponseEntity<?> registeredCourse(@Param("semesterId") int semesterId){
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

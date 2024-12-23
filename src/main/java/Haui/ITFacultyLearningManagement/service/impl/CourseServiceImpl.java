@@ -139,7 +139,7 @@ public class CourseServiceImpl implements CourseService {
         if (semesterOptional.isEmpty())
             return 0;
 
-        if (!LocalDate.now().isAfter(semesterOptional.get().getStartTime()) &&
+        if (LocalDate.now().isAfter(semesterOptional.get().getStartTime()) ||
                 LocalDate.now().isBefore(semesterOptional.get().getStartTime().minusMonths(1)))
             return 6;// het thoi gian dang ky
 
@@ -170,6 +170,13 @@ public class CourseServiceImpl implements CourseService {
 
         Optional<CourseRegistration> courseRegistrationOptional = courseRegistrationRepository.findByStuAndClass(studentId,classId);
         if (courseRegistrationOptional.isEmpty())
+            return false;
+
+        Optional<Semester> semesterOptional = semesterRepository.findById(classroomOptional.get().getSemesterId());
+        if (semesterOptional.isEmpty())
+            return false;
+
+        if (semesterOptional.get().getStartTime().isBefore(LocalDate.now()))
             return false;
 
         Classroom classroom = classroomOptional.get();

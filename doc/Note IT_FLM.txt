@@ -11,9 +11,7 @@
 - khi đánh giá xong button của các chức năng bị nhảy ltung
 
 
-- api cancle học phần thiếu check điều kiện là phải ở học kỳ hiện tại thì mới được hủy
-- api đăng ký học phần vẫn đăng ký được học phần k phải o kỳ hiện tại 
-- api cập nhật học phần phải cập nhật theo course_id chứ không phải là condition
+
 
 thêm khoa công nghệ thông tin 
 thống kê điểm theo môn học
